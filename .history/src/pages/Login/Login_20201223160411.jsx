@@ -1,10 +1,7 @@
 import React, { Component } from 'react';
 import Header from './Header/Header';
-import { Form, Icon, Input, Button, Checkbox, message } from 'antd';
-import { Redirect } from 'react-router-dom';
+import { Form, Icon, Input, Button,Checkbox} from 'antd';
 import './Login.css';
-import { reqLogin } from '../../api';
-import StoreUtils from '../../utils/storeUtils';
 class Login extends Component {
     constructor(props) {
         super(props);
@@ -13,49 +10,28 @@ class Login extends Component {
   // 表单提交事件
     handleSubmit = e => {
     e.preventDefault();
-    this.props.form.validateFields(async (err, values) => {
+    this.props.form.validateFields((err, values) => {
       if (!err) {
         console.log('Received values of form: ', values);
-        // 拿到values里面的用户名和密码信息
-        const { username, password } = values;
-        // 发起axios请求，拿到后端返回的数据，
-        const res = await reqLogin(username, password);
-        console.log(res);
-        // 判断后端返回的接口数据状态，status=1表示用户存在，否则不存在
-        if (res.data.status === 0) {
-          // 提示登录成功
-          message.success('登录成功', 1);
-          // 存储localstorage
-          const user = res.data.data;
-          StoreUtils.saveUser(user);
-          // 页面跳转-> admin
-          this.props.history.replace('/');
-        } 
       }
     });
   };
   // 自定义表单验证规则
-  // validateRules = (rule, value, callback) => { 
-  //   // console.log(value);
-  //   if (!value) {
-  //     callback('用户名必须输入')
-  //   } else if (value.length < 4) {
-  //     callback('用户名不得少于4位')
-  //   } else if (value.length > 8) {
-  //     callback('用户名不得多于8位')
-  //   } else if (!/^[\w]{4,8}$/.test(value)) {
-  //     callback('用户名由任意数字字母下划线构成')
-  //   } else { 
-  //     callback()
-  //   }
-  // }
-  render() {
-        // 进行判断,在已登陆状态下，不能会退到login页面。直接跳转到首页，使用重定向设置。
-        const user = StoreUtils.getUser();
-        if (user && user._id) {
-          //证明已经登陆过了,跳转到首页
-          return <Redirect to="/" />;
-        }
+  validateRules = (rule, value, callback) => { 
+    // console.log(value);
+    if (!value) {
+      callback('用户名必须输入')
+    } else if (value.length < 4) {
+      callback('用户名不得少于4位')
+    } else if (value.length > 8) {
+      callback('用户名不得多于8位')
+    } else if (!/^[\w]{4,8}$/.test(value)) {
+      callback('用户名由任意数字字母下划线构成')
+    } else { 
+      callback()
+    }
+  }
+    render() {
         const { getFieldDecorator } = this.props.form;
         return (
             <div className="login">
@@ -66,9 +42,9 @@ class Login extends Component {
               <Form.Item>
                 {getFieldDecorator('username', {
                   rules: [
-                    { required: true, message: '请输入用户名!' },
-                    { min: 4, message: '最少4位' },
-                      { max: 8, message: '最多8位' },   
+                    // { required: true, message: '请输入用户名!' },
+                    // { min: 4, message: '最少4位' },
+                    //   { max: 8, message: '最多8位' },   
                     {validator:this.validateRules  }
                   ],
                   validateTrigger:'onBlur',//input输入框失去焦点时触发校验规则
@@ -83,7 +59,7 @@ class Login extends Component {
           {getFieldDecorator('password', {
             rules: [
               { required: true, message: '请输入密码!' },
-              // { pattern: /^\d{6,8}$/, message: '密码为5-8位数字' },
+              { pattern: /^\d{6,8}$/, message: '密码为5-8位数字' },
             ],
             validateTrigger:'onBlur',
           })(

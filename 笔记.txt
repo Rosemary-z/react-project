@@ -1,0 +1,39 @@
+登录页面跳转实现逻辑
+1. axios 引入 与配置
+yarn add axios --save
+2. src下新建api文件夹,封装axios请求
+    axios.js引入axios
+3. api文件夹新建index.js,封装所有的服务端请求
+4. package.json 配置服务器访问端口
+    "proxy":"http://localhost:5000"
+---------------------------------------
+本次项目开发环境：nodejs + mongodb + react
+服务器启动需要装载mongodb，详情参考：https://www.cnblogs.com/littlepage/p/10992336.html
+
+5. login页面onsubmit事件内，存储用户输入的用户名和密码，匹配服务器返回数据状态
+    status===0，成功；
+    status===1，失败。
+
+6. 下载插件，js-cookie(貌似没有用上？)
+    yarn add js-cookie
+    js-cookie 中文文档（网友整理版本：https://blog.csdn.net/qq_20802379/article/details/81436634）
+
+7. 安装引入store
+    yarn add store
+    github 文档地址：[https://github.com/marcuswestin/store.js]
+
+8. 封装utils函数，简化localstorage存储机制
+
+9. onsubmit事件触发时，设置localstorage
+
+10. status === 0,提示用户登录成功，ant-design提供的message.success('登录成功'，1) 秒为单位显示提示信息
+
+11. 跳转页面
+    this.props.history.replace('/');
+    此处用replace代替push，更符合业务场景需求。
+
+12. 已经进入login页面状态下，判断是否有该user值，如果存在，则不允许用户会退到login页面。使用重定向。
+
+
+
+

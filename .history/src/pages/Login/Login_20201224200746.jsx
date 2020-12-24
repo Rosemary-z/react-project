@@ -1,10 +1,8 @@
 import React, { Component } from 'react';
 import Header from './Header/Header';
-import { Form, Icon, Input, Button, Checkbox, message } from 'antd';
-import { Redirect } from 'react-router-dom';
+import { Form, Icon, Input, Button,Checkbox, message} from 'antd';
 import './Login.css';
 import { reqLogin } from '../../api';
-import StoreUtils from '../../utils/storeUtils';
 class Login extends Component {
     constructor(props) {
         super(props);
@@ -22,15 +20,10 @@ class Login extends Component {
         const res = await reqLogin(username, password);
         console.log(res);
         // 判断后端返回的接口数据状态，status=1表示用户存在，否则不存在
-        if (res.data.status === 0) {
-          // 提示登录成功
-          message.success('登录成功', 1);
-          // 存储localstorage
-          const user = res.data.data;
-          StoreUtils.saveUser(user);
-          // 页面跳转-> admin
-          this.props.history.replace('/');
-        } 
+        // if (res.data.status === 0) {
+        //   // 提示登录成功
+        //   message.success('登录成功',1)
+        //  }
       }
     });
   };
@@ -49,13 +42,7 @@ class Login extends Component {
   //     callback()
   //   }
   // }
-  render() {
-        // 进行判断,在已登陆状态下，不能会退到login页面。直接跳转到首页，使用重定向设置。
-        const user = StoreUtils.getUser();
-        if (user && user._id) {
-          //证明已经登陆过了,跳转到首页
-          return <Redirect to="/" />;
-        }
+    render() {
         const { getFieldDecorator } = this.props.form;
         return (
             <div className="login">
