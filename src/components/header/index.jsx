@@ -2,13 +2,41 @@ import React, { Component } from "react";
 import "./index.css";
 import StoreUtils from "../../utils/storeUtils";
 import { getCurrentTime } from "../../utils/timeUtils";
+import { Modal } from "antd";
 class Header extends Component {
   constructor(props) {
     super(props);
     this.state = {
       currentTime: getCurrentTime(Date.now()),
+      visible: false,
     };
   }
+  showModal = () => {
+    this.setState({
+      visible: true,
+    });
+  };
+
+  hideModal = () => {
+    this.setState({
+      visible: false,
+    });
+  };
+  // 确认消除localstorage
+  handleOk = () => {
+    StoreUtils.removeUser();
+    this.setState({
+      visible: false,
+    });
+    // 跳转回登录页面
+    this.props.history.push("/login");
+  };
+  // 点击取消关闭弹窗
+  handleCancel = () => {
+    this.setState({
+      visible: false,
+    });
+  };
   // 设置获取当前时间的函数
   getTime = () => {
     this.interval = setInterval(() => {
@@ -29,7 +57,10 @@ class Header extends Component {
     return (
       <div className="home-header">
         <div className="home-header-top">
-          <span className="logout">退出</span>
+          {/* <span className="logout">退出</span> */}
+          <span className="logout" onClick={this.showModal}>
+            退出
+          </span>
           <span className="welcome">欢迎,{username}</span>
         </div>
         <div className="home-header-bottom">
@@ -39,9 +70,26 @@ class Header extends Component {
             <span>weather</span>
           </p>
         </div>
+        <Modal
+          title="退出登录"
+          visible={this.state.visible}
+          onOk={this.handleOk}
+          onCancel={this.handleCancel}
+          okText="确认"
+          cancelText="取消"
+        >
+          <p>您确定要退出吗</p>
+        </Modal>
       </div>
     );
   }
 }
+// function confirm() {
+//   Modal.confirm({
+//     content: "您确定要退出吗",
+//     okText: "确认",
+//     cancelText: "取消",
+//   });
+// }
 
 export default Header;
