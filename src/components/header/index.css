@@ -1,0 +1,38 @@
+.home-header{
+    background: #ffffff;
+    color: #818180;
+}
+.home-header-top,.home-header-bottom{
+    height: 40px;
+    line-height: 40px;
+}
+/* 顶部欢迎退出 */
+.home-header-top{
+    padding-right: 40px;
+    border-bottom: 1px solid #10967b;
+}
+.home-header-top span{
+    float:right;
+}
+.home-header-top .welcome{
+    margin-right: 20px;
+}
+.home-header-top  .logout{
+    color: #10967b;
+}
+/* 底部首页、时间、天气字样 */
+.home-header-bottom {
+    display: flex;
+    justify-content: space-between;
+}
+.home-header-bottom h2{
+    font-weight: bold;
+    font-size: large;
+    margin-left: 80px;
+}
+.home-header-bottom p{
+    margin-right: 30px;
+}
+.home-header-bottom p span{
+    margin-left: 20px;
+}
