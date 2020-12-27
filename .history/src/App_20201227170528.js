@@ -14,7 +14,7 @@ class App extends Component {
     return (
       <BrowserRouter>
         <Switch>
-          <Route path="/login" component={Login}/>
+          <Route path="/login" component={Login} history={ this.props.history}/>
           <Route path="/" component={Admin} />
         </Switch>
       </BrowserRouter>

@@ -58,8 +58,8 @@ class Login extends Component {
         }
         const { getFieldDecorator } = this.props.form;
         return (
-            <div className="login" >
-                <Header/>  
+            <div className="login" history={ this.props.history}>
+                <Header />  
             <div className="login-content">
             <h3>用户登录</h3>
             <Form onSubmit={this.handleSubmit} className="login-form">

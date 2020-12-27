@@ -42,8 +42,7 @@ class LeftNav extends Component {
       }
      })
   }
-  UNSAFE_componentWillMount() { 
-    // 这个生命周期函数是在render执行之前执行的。
+  componentDidMount() { 
     this.getNodes = this.getMenuList(menuList);
   }
   render() {
@@ -55,7 +54,7 @@ class LeftNav extends Component {
     return (
       <div>
         <Menu
-          selectedKeys={[path]}
+          defaultSelectedKeys={[path]}
           defaultOpenKeys={[openKey]}
           mode="inline"
           theme="dark"

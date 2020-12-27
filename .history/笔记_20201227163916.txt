@@ -39,8 +39,4 @@ admin左侧nav导航部分的title渲染，通过map+递归的方式进行渲染
 => 注意，访问子菜单，charts/pie等，通过找到上层父级的path来进行子项展开的操作，应该注意，render渲染是在获取到openkey之前，所以openkey为undefined，
 -> 解决方式：将getMenList() 方法放在willmount生命中周期函数中来使用
 
-### public公共文件夹中，html根页面中引入的reset.css文件不能引入相对路径的文件夹，不然会报错。
 
-### 如果组件不是一个路由组件，那么组件内部使用this.history.push 的方式，会报错，解决方式两种：
-1. 引入withRouter包装成路由组件
-2. 父组件传递 history={this.props.history} 给子组件
