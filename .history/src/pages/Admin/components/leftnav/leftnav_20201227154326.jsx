@@ -1,6 +1,6 @@
 import React, { Component } from "react";
-import { withRouter, Link } from "react-router-dom";
 import { Menu, Icon } from "antd";
+import { withRouter, Link } from "react-router-dom";
 import menuList from '../../../../fonfig/menuConfig';
 const { SubMenu } = Menu;
 class LeftNav extends Component {
@@ -9,7 +9,7 @@ class LeftNav extends Component {
     this.state = {};
   }
   getMenuList = (menuList) => {
-    const path = this.props.location.pathname;
+    // const path = this.props.location.pathname;
     return menuList.map((item) => {
       if (!item.children) {
         return (
@@ -21,11 +21,8 @@ class LeftNav extends Component {
           </Menu.Item>
         )
       } else { 
-        const cItem = item.children.find((cItem) =>  cItem.key === path
-        )
-        if (cItem) { 
-          this.openKey = item.key
-        }
+        // const cItem = item.children.find((cItem) =>  cItem.key === path
+        // )
         return (
           <SubMenu
           key={ item.key}
@@ -41,26 +38,18 @@ class LeftNav extends Component {
         )
       }
      })
-  }
-  UNSAFE_componentWillMount() { 
-    // 这个生命周期函数是在render执行之前执行的。
-    this.getNodes = this.getMenuList(menuList);
-  }
+   }
   render() {
-    const path = this.props.location.pathname;
-    const getNodes = this.getNodes;
-    const openKey = this.openKey;
-    // alert(openKey);
-    // render先于执行menuList函数之前，所以undefined
+    const path  = this.props.location.pathname;
     return (
       <div>
         <Menu
-          selectedKeys={[path]}
-          defaultOpenKeys={[openKey]}
+          defaultSelectedKeys={[path]}
+          defaultOpenKeys={["sub1", "sub2"]}
           mode="inline"
           theme="dark"
         >
-          { getNodes}
+          { this.getMenuList(menuList)}
         </Menu>
       </div>
     );

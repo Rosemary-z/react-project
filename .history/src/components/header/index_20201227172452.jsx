@@ -30,8 +30,6 @@ class Header extends Component {
       visible: false,
     });
     // 跳转回登录页面
-    // 这里需要将header组件包装成一个路由组件来导出，不然路径跳转会报错。
-    // 另外一种解决方式，在引入Header的地方，加入history={ this.props.history}属性设置
     this.props.history.push("/login");
   };
   // 点击取消关闭弹窗

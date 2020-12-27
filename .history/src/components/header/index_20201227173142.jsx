@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { withRouter } from 'react-router-dom';
+// import { withRouter } from 'react-router-dom';
 import "./index.css";
 import StoreUtils from "../../utils/storeUtils";
 import { getCurrentTime } from "../../utils/timeUtils";
@@ -95,4 +95,4 @@ class Header extends Component {
 //   });
 // }
 
-export default withRouter(Header) ;
+export default Header ;

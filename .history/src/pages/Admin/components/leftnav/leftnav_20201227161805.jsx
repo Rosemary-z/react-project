@@ -55,7 +55,7 @@ class LeftNav extends Component {
     return (
       <div>
         <Menu
-          selectedKeys={[path]}
+          defaultSelectedKeys={[path]}
           defaultOpenKeys={[openKey]}
           mode="inline"
           theme="dark"
