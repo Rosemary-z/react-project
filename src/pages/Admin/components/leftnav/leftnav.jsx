@@ -1,101 +1,69 @@
-import React, { Component } from "react";
-import { Menu, Icon } from "antd";
+import React from "react";
 import { withRouter, Link } from "react-router-dom";
-class LeftNav extends Component {
+import { Menu, Icon } from "antd";
+import menuList from "../../../../config/menuConfig";
+const { SubMenu } = Menu;
+class Leftnav extends React.Component {
   constructor(props) {
     super(props);
     this.state = {};
   }
+  getMenuList = (menuList) => {
+    const path = this.props.location.pathname;
+    return menuList.map((item) => {
+      if (!item.children) {
+        //如果不存在子菜单，说明只有一级菜单
+        return (
+          <Menu.Item key={item.key}>
+            <Link to={item.key}>
+              <Icon type={item.icon} />
+              <span>{item.title}</span>
+            </Link>
+          </Menu.Item>
+        );
+      } else {
+        //如果有children，说明是有子菜单的
+        const cItem = item.children.find((cItem) => cItem.key === path);
+        if (cItem) {
+          this.openKey = item.key;
+        }
+        return (
+          <SubMenu
+            key={item.key}
+            title={
+              <span>
+                <Icon type={item.icon} />
+                <span>{item.title}</span>
+              </span>
+            }
+          >
+            {this.getMenuList(item.children)}
+          </SubMenu>
+        );
+      }
+    });
+  };
+  // 这个生命周期函数是在render之前执行的
+  componentWillMount() {
+    this.getNodes = this.getMenuList(menuList);
+  }
   render() {
-    const { SubMenu } = Menu;
+    const path = this.props.location.pathname;
+    const getNodes = this.getNodes;
+    const openKey = this.openKey;
     return (
       <div>
         <Menu
-          defaultSelectedKeys={["1"]}
-          defaultOpenKeys={["sub1", "sub2"]}
+          selectedKeys={[path]}
+          defaultOpenKeys={[openKey]}
           mode="inline"
           theme="dark"
         >
-          <Menu.Item key="1">
-            <Link to="/home">
-              <Icon type="pie-chart" />
-              <span>首页</span>
-            </Link>
-          </Menu.Item>
-          <SubMenu
-            key="sub1"
-            title={
-              <span>
-                <Icon type="mail" />
-                <span>商品</span>
-              </span>
-            }
-          >
-            <Menu.Item key="2">
-              <Link to="/product/category">
-                <Icon type="appstore" />
-                <span>发布分类</span>
-              </Link>
-            </Menu.Item>
-            <Menu.Item key="3">
-              <Link to="/product/catelist">
-                <Icon type="appstore" />
-                <span>分类管理</span>
-              </Link>
-            </Menu.Item>
-          </SubMenu>
-          <Menu.Item key="4">
-            <Link to="/user">
-              <Icon type="desktop" />
-              <span>用户管理</span>
-            </Link>
-          </Menu.Item>
-          <Menu.Item key="5">
-            <Link to="/role">
-              <Icon type="inbox" />
-              <span>角色管理</span>
-            </Link>
-          </Menu.Item>
-          <SubMenu
-            key="sub2"
-            title={
-              <span>
-                <Icon type="appstore" />
-                <span>图形图标</span>
-              </span>
-            }
-          >
-            <Menu.Item key="6">
-              <Link to="/charts/line">
-                <Icon type="appstore" />
-                <span>折线图</span>
-              </Link>
-            </Menu.Item>
-
-            <Menu.Item key="7">
-              <Link to="/charts/pie">
-                <Icon type="appstore" />
-                <span>饼状图</span>
-              </Link>
-            </Menu.Item>
-
-            <Menu.Item key="8">
-              <Link to="/charts/bar">
-                <Icon type="desktop" />
-                <span>柱状图</span>
-              </Link>
-            </Menu.Item>
-          </SubMenu>
-          <Menu.Item key="9">
-            <Link to="/order">
-              <Icon type="desktop" />
-              <span>订单管理</span>
-            </Link>
-          </Menu.Item>
+          {getNodes}
         </Menu>
       </div>
     );
   }
 }
 
-export default withRouter(LeftNav);
+export default withRouter(Leftnav);

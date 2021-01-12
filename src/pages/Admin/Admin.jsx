@@ -1,6 +1,5 @@
 import React, { Component } from "react";
-// import StoreUtils from '../../utils/storeUtils';
-// import { Redirect } from 'react-router-dom';
+// import StoreUtils from "../../utils/storeUtils";
 import { Layout } from "antd";
 import SideHeader from "./components/header/header";
 import HomeHeader from "../../components/header";
@@ -16,6 +15,7 @@ import Order from "./order/order";
 import Category from "./product/category";
 import CateList from "./product/catelist";
 import EditCategory from "./product/editcategory";
+import { connect } from "react-redux";
 class Admin extends Component {
   constructor(props) {
     super(props);
@@ -23,11 +23,17 @@ class Admin extends Component {
   }
   render() {
     const { Footer, Sider, Content } = Layout;
+    console.log("admin组件props", this.props);
     //在render渲染函数里面，判断是否存在localstorage值，如果不存在，则重定向到登录页面
     // const user = StoreUtils.getUser();
     // if (!user || !user.id) {
-    //     return <Redirect to="/login" />
-    //  }
+    //   return <Redirect to="/login" />;
+    // }
+    // 提取状态机里的isLogin数据，true则放行
+    // let { isLogin } = this.props.user;
+    // if (!isLogin) {
+    //   return <Redirect to="/login" />;
+    // }
     return (
       <Layout style={{ height: "100%" }}>
         <Sider>
@@ -57,5 +63,7 @@ class Admin extends Component {
     );
   }
 }
-
-export default Admin;
+const mapStateToProps = (state) => {
+  return { user: state.user };
+};
+export default connect(mapStateToProps)(Admin);

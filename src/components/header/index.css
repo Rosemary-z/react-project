@@ -19,6 +19,7 @@
 }
 .home-header-top  .logout{
     color: #10967b;
+    cursor: pointer;
 }
 /* 底部首页、时间、天气字样 */
 .home-header-bottom {
