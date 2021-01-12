@@ -32,15 +32,15 @@ class LeftNav extends Component {
             }
           >
             <Menu.Item key="2">
-              <Link to="/category">
+              <Link to="/product/category">
                 <Icon type="appstore" />
-                <span> 品类管理</span>
+                <span>发布分类</span>
               </Link>
             </Menu.Item>
             <Menu.Item key="3">
-              <Link to="/product">
+              <Link to="/product/catelist">
                 <Icon type="appstore" />
-                <span>商品管理</span>
+                <span>分类管理</span>
               </Link>
             </Menu.Item>
           </SubMenu>

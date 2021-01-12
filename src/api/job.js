@@ -3,7 +3,11 @@ import request from './request.js';
 export const enterPC = (data) => {
     return request.post('/1.1/classes/positionCategory', data)
 }
-// 查询职位列表
-export const getPositionDetails = () => {
-    return request.get('/1.1/classes/positionCategory ')
+// 查询分类列表
+export const getCategoryList = () => {
+    return request.get('/1.1/classes/positionCategory')
+}
+// 修改分类
+export const editCate = (objectId,data) => {
+    return request.put(`/1.1/classes/positionCategory/${objectId}`,data)
 }

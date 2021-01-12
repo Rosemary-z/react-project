@@ -14,7 +14,8 @@ import Line from "./charts/line";
 import Pie from "./charts/pie";
 import Order from "./order/order";
 import Category from "./product/category";
-import Product from "./product/product";
+import CateList from "./product/catelist";
+import EditCategory from "./product/editcategory";
 class Admin extends Component {
   constructor(props) {
     super(props);
@@ -41,8 +42,9 @@ class Admin extends Component {
               <Route path="/user" component={User} />
               <Route path="/role" component={Role} />
               <Route path="/order" component={Order} />
-              <Route path="/category" component={Category} />
-              <Route path="/product" component={Product} />
+              <Route path="/product/category" component={Category} />
+              <Route path="/product/catelist" component={CateList} />
+              <Route path="/product/editcategory" component={EditCategory} />
               <Route path="/charts/bar" component={Bar} />
               <Route path="/charts/line" component={Line} />
               <Route path="/charts/pie" component={Pie} />

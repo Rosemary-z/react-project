@@ -1,9 +1,0 @@
-登录页面跳转实现逻辑
-1. axios 引入 与配置
-yarn add axios --save
-2. src下新建api文件夹,封装axios请求
-    axios.js引入axios
-3. api文件夹新建index.js,封装所有的服务端请求
-4. package.json 配置服务器访问端口
-    "proxy":"http://localhost:5000"
-
