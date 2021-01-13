@@ -34,9 +34,7 @@ class Admin extends Component {
           <LeftNav />
         </Sider>
         <Layout>
-          <HomeHeader/>
-          {/* HomeHeader 如果没有包装成一个路由组件，可以通过传递history方式，
-           history={this.props.history} 传递给子组件，避免路由跳转出现错误 */}
+          <HomeHeader history={ this.props.history}/>
           <Content>
             <Switch>
               <Route path="/home" component={Home} />
